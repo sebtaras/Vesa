@@ -1,12 +1,22 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import DrawerNavigator from "./DrawerNavigator";
+import Home from "../screens/Home";
+import { useTheme } from "../hooks/useTheme";
+import Header from "../components/Header";
 
 const Stack = createNativeStackNavigator();
 
 export const StackNavigator = () => {
+	const { theme } = useTheme();
+
 	return (
-		<Stack.Navigator initialRouteName="Drawer">
-			<Stack.Screen name="Drawer" component={DrawerNavigator} />
+		<Stack.Navigator initialRouteName="Home">
+			<Stack.Screen
+				name="Home"
+				component={Home}
+				options={{
+					header: () => <Header showBackComponent={false} />,
+				}}
+			/>
 		</Stack.Navigator>
 	);
 };

@@ -21,11 +21,11 @@ export const dayTheme: Theme = {
 	backgroundColor1: "#ededed",
 	backgroundColor2: "#d6d6d6",
 	text: "#171717",
-	// primary: "#eb4034", cool red color
 	primary: "#7da6ff",
 	green: "#08A045",
 	grey: "#a1a1a1",
 	icons: "black",
+	red: "#eb4034",
 };
 
 export const nightTheme: Theme = {

@@ -22,6 +22,7 @@ export default function App() {
 	let [fontsLoaded] = useFonts({
 		Ubuntu_400Regular,
 		Ubuntu_500Medium,
+		Ubuntu_700Bold_Italic,
 	});
 
 	const onLayoutRootView = useCallback(async () => {
