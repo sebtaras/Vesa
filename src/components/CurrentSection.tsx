@@ -24,6 +24,7 @@ const CurrentSection = () => {
 	const width = useSharedValue(0);
 
 	const setWidth = () => {
+		console.log("im widthinggg");
 		width.value = withTiming(widthP * maxWidth, {
 			duration: 1500,
 			easing: Easing.out(Easing.ease),
@@ -90,7 +91,6 @@ const CurrentSection = () => {
 								backgroundColor: theme.green,
 								position: "relative",
 							},
-							// animatedStyles.progressBar,
 						]}
 					></Animated.View>
 					<Text
