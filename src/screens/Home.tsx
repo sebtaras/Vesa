@@ -41,7 +41,11 @@ const SLIDER_MARGIN = (SLIDER_HEIGHT - INNER_SLIDER_HEIGHT) / 2;
 const SLIDER_END = SLIDER_WIDTH - INNER_SLIDER_WIDTH - 2 * SLIDER_MARGIN;
 const SLIDER_THRESHOLD = SLIDER_WIDTH - 20;
 
-const Home = (): JSX.Element => {
+interface Props {
+	navigation: any;
+}
+
+const Home = ({ navigation }: Props): JSX.Element => {
 	const { theme } = useTheme();
 	const X = useSharedValue(0);
 
@@ -198,7 +202,7 @@ const Home = (): JSX.Element => {
 			<Separator />
 			<View style={[styles.periodContainer, { backgroundColor: theme.backgroundColor1 }]}>
 				<Text style={[styles.sectionText, { color: theme.text }]}>Current period</Text>
-				<CurrentSection />
+				<CurrentSection navigation={navigation} />
 			</View>
 			<Separator />
 			<View style={[styles.recentContainer, { backgroundColor: theme.backgroundColor1 }]}>
@@ -279,6 +283,7 @@ const Home = (): JSX.Element => {
 							justifyContent: "center",
 							elevation: 3,
 						}}
+						onPress={() => navigation.push("History")}
 					>
 						<Entypo name="arrow-right" size={35} color="black" />
 					</TouchableOpacity>

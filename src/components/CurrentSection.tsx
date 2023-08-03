@@ -16,8 +16,13 @@ import Animated, {
 	Easing,
 } from "react-native-reanimated";
 import { useState, useEffect, useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
 
-const CurrentSection = () => {
+interface Props {
+	navigation: any;
+}
+
+const CurrentSection = ({ navigation }: Props) => {
 	const { theme } = useTheme();
 	const [maxWidth, setMaxWidth] = useState(0);
 	const widthP = 113.65 / 200;
@@ -117,6 +122,7 @@ const CurrentSection = () => {
 					justifyContent: "center",
 					elevation: 3,
 				}}
+				onPress={() => navigation.push("Period")}
 			>
 				<Entypo name="arrow-right" size={35} color="black" />
 			</TouchableOpacity>

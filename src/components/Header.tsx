@@ -12,13 +12,16 @@ import { TouchableOpacity } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { largeFont, logoFont } from "../util/commonStyles";
+import { useRoute } from "@react-navigation/native";
 
 interface Props {
 	showBackComponent: boolean;
+	navigation?: any;
 }
 
-const Header = ({ showBackComponent }: Props) => {
+const Header = ({ showBackComponent, navigation }: Props) => {
 	const { theme } = useTheme();
+	const { name: routeName } = useRoute();
 	return (
 		<View
 			style={{
@@ -39,8 +42,11 @@ const Header = ({ showBackComponent }: Props) => {
 					backgroundColor: theme.primary,
 				}}
 			>
-				{showBackComponent ? (
-					<TouchableOpacity style={{ marginLeft: widthPercentageToDP("2%"), flex: 1 }}>
+				{showBackComponent && navigation ? (
+					<TouchableOpacity
+						onPress={() => navigation.goBack()}
+						style={{ marginLeft: widthPercentageToDP("2%"), flex: 1 }}
+					>
 						<Ionicons name="arrow-back-sharp" size={30} color="black" />
 					</TouchableOpacity>
 				) : (
@@ -52,9 +58,11 @@ const Header = ({ showBackComponent }: Props) => {
 							color: theme.text,
 							fontSize: logoFont,
 							fontFamily: "Ubuntu_700Bold_Italic",
+							minWidth: widthPercentageToDP("50%"),
+							textAlign: "center",
 						}}
 					>
-						VE$A
+						{routeName === "Home" ? "VE$A" : routeName}
 					</Text>
 				</View>
 				<TouchableOpacity style={{ marginRight: widthPercentageToDP("2%"), flex: 1 }}>
