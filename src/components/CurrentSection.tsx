@@ -20,21 +20,8 @@ import { useState, useEffect, useRef } from "react";
 const CurrentSection = () => {
 	const { theme } = useTheme();
 	const [maxWidth, setMaxWidth] = useState(0);
-	// const [progress, setProgress] = useState(new Animated.Value(0));
 	const widthP = 113.65 / 200;
 	const width = useSharedValue(0);
-
-	// const fadeAnim = useRef(new Animated.Value(0)).current;
-
-	// const fadeIn = () => {
-	// 	// Will change fadeAnim value to 1 in 5 seconds
-	// 	Animated.timing(fadeAnim, {
-	// 		toValue: widthP * maxWidth,
-	// 		duration: 5000,
-	// 	}).start();
-	// };
-
-	// const fadeAnim = useRef(new Animated.Value(0)).current;
 
 	const setWidth = () => {
 		width.value = withTiming(widthP * maxWidth, {
@@ -44,18 +31,8 @@ const CurrentSection = () => {
 	};
 
 	useEffect(() => {
-		// fadeIn();
 		setWidth();
 	}, []);
-
-	const animatedStyles = {
-		progressBar: useAnimatedStyle(() => {
-			return {
-				width: interpolate(widthP, [0, 1], [0, maxWidth], Extrapolate.CLAMP),
-				// width: width.value,
-			};
-		}),
-	};
 
 	return (
 		<View style={sharedStyles.sectionContainer}>
