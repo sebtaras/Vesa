@@ -16,7 +16,7 @@ import { useRoute } from "@react-navigation/native";
 
 interface Props {
 	showBackComponent: boolean;
-	navigation?: any;
+	navigation: any;
 }
 
 const Header = ({ showBackComponent, navigation }: Props) => {
@@ -42,7 +42,7 @@ const Header = ({ showBackComponent, navigation }: Props) => {
 					backgroundColor: theme.primary,
 				}}
 			>
-				{showBackComponent && navigation ? (
+				{showBackComponent ? (
 					<TouchableOpacity
 						onPress={() => navigation.goBack()}
 						style={{ marginLeft: widthPercentageToDP("2%"), flex: 1 }}
@@ -65,9 +65,16 @@ const Header = ({ showBackComponent, navigation }: Props) => {
 						{routeName === "Home" ? "VE$A" : routeName}
 					</Text>
 				</View>
-				<TouchableOpacity style={{ marginRight: widthPercentageToDP("2%"), flex: 1 }}>
-					<FontAwesome5 name="cog" size={27} color="black" />
-				</TouchableOpacity>
+				{routeName === "Settings" ? (
+					<View style={{ marginLeft: widthPercentageToDP("2%"), flex: 1 }}></View>
+				) : (
+					<TouchableOpacity
+						style={{ marginRight: widthPercentageToDP("2%"), flex: 1 }}
+						onPress={() => navigation.navigate("Settings")}
+					>
+						<FontAwesome5 name="cog" size={27} color="black" />
+					</TouchableOpacity>
+				)}
 			</View>
 		</View>
 	);

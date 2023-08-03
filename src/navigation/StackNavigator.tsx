@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import History from "../screens/History";
 import Period from "../screens/Period";
 import { useNavigation } from "@react-navigation/native";
+import Settings from "../screens/Settings";
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +18,7 @@ export const StackNavigator = () => {
 				name="Home"
 				component={Home}
 				options={{
-					header: () => <Header showBackComponent={false} />,
+					header: () => <Header navigation={navigation} showBackComponent={false} />,
 				}}
 			/>
 			<Stack.Screen
@@ -30,6 +31,13 @@ export const StackNavigator = () => {
 			<Stack.Screen
 				name="History"
 				component={History}
+				options={{
+					header: () => <Header navigation={navigation} showBackComponent={true} />,
+				}}
+			/>
+			<Stack.Screen
+				name="Settings"
+				component={Settings}
 				options={{
 					header: () => <Header navigation={navigation} showBackComponent={true} />,
 				}}
