@@ -22,7 +22,8 @@ export const dayTheme: Theme = {
 	backgroundColor2: "#d6d6d6",
 	text: "#171717",
 	primary: "#7da6ff",
-	green: "#08A045",
+	// green: "#08A045", good green
+	green: "#79ff4d",
 	grey: "#a1a1a1",
 	icons: "black",
 	red: "#eb4034",

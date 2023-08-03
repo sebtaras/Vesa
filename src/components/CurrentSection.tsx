@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Easing, EasingFunction } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import {
 	heightPercentageToDP,
@@ -7,19 +7,55 @@ import {
 import { useTheme } from "../hooks/useTheme";
 import { normalFont, sharedStyles } from "../util/commonStyles";
 import { Entypo } from "@expo/vector-icons";
-import Animated from "react-native-reanimated";
+import Animated, {
+	Extrapolate,
+	interpolate,
+	useAnimatedStyle,
+	useSharedValue,
+	withTiming,
+	Easing,
+} from "react-native-reanimated";
 import { useState, useEffect, useRef } from "react";
 
 const CurrentSection = () => {
 	const { theme } = useTheme();
+	const [maxWidth, setMaxWidth] = useState(0);
 	// const [progress, setProgress] = useState(new Animated.Value(0));
-	const fadeAnim = new Animated.Value(0);
+	const widthP = 113.65 / 200;
+	const width = useSharedValue(0);
 
-	// Animated.timing(fadeAnim, {
-	// 	toValue: 75,
-	// 	duration: 2000,
-	// 	easing: Easing.back(5),
-	// }).start();
+	// const fadeAnim = useRef(new Animated.Value(0)).current;
+
+	// const fadeIn = () => {
+	// 	// Will change fadeAnim value to 1 in 5 seconds
+	// 	Animated.timing(fadeAnim, {
+	// 		toValue: widthP * maxWidth,
+	// 		duration: 5000,
+	// 	}).start();
+	// };
+
+	// const fadeAnim = useRef(new Animated.Value(0)).current;
+
+	const setWidth = () => {
+		width.value = withTiming(widthP * maxWidth, {
+			duration: 1500,
+			easing: Easing.out(Easing.ease),
+		});
+	};
+
+	useEffect(() => {
+		// fadeIn();
+		setWidth();
+	}, []);
+
+	const animatedStyles = {
+		progressBar: useAnimatedStyle(() => {
+			return {
+				width: interpolate(widthP, [0, 1], [0, maxWidth], Extrapolate.CLAMP),
+				// width: width.value,
+			};
+		}),
+	};
 
 	return (
 		<View style={sharedStyles.sectionContainer}>
@@ -49,16 +85,50 @@ const CurrentSection = () => {
 				>
 					Free to spend: 13.8/day
 				</Text>
+				{/* parent bar */}
 				<View
-					style={{ flex: 1, backgroundColor: theme.backgroundColor2, borderRadius: 10 }}
+					onLayout={(event) => {
+						var { width } = event.nativeEvent.layout;
+						setMaxWidth(width);
+						console.log("width", width);
+					}}
+					style={{
+						flex: 1,
+						backgroundColor: theme.backgroundColor2,
+						borderRadius: 10,
+						borderTopLeftRadius: 0,
+						borderBottomLeftRadius: 0,
+						justifyContent: "center",
+					}}
 				>
+					{/* inner bar */}
 					<Animated.View
-						style={{
-							width: 100,
-							backgroundColor: theme.green,
-							position: "relative",
-						}}
+						style={[
+							{
+								width: width,
+								flex: 1,
+								borderRadius: 10,
+								borderTopLeftRadius: 0,
+								borderBottomLeftRadius: 0,
+								backgroundColor: theme.green,
+								position: "relative",
+							},
+							// animatedStyles.progressBar,
+						]}
 					></Animated.View>
+					<Text
+						style={[
+							sharedStyles.largeText,
+							{
+								color: theme.text,
+								position: "absolute",
+								alignSelf: "center",
+								textAlignVertical: "center",
+							},
+						]}
+					>
+						`{(widthP * 100).toFixed(2)}%
+					</Text>
 				</View>
 			</View>
 			<TouchableOpacity

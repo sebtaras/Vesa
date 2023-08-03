@@ -88,6 +88,7 @@ const Home = (): JSX.Element => {
 
 	const handleGestureEvent = useAnimatedGestureHandler({
 		onStart: (_, context: any) => {
+			console.log("??!?!?");
 			context.startX = X.value;
 			context.endX = SLIDER_END;
 		},

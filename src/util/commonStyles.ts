@@ -23,6 +23,10 @@ export const sharedStyles = StyleSheet.create({
 		fontFamily: "Ubuntu_400Regular",
 		fontSize: normalFont,
 	},
+	largeText: {
+		fontFamily: "Ubuntu_400Regular",
+		fontSize: largeFont,
+	},
 });
 
 export const debugStyles = StyleSheet.create({

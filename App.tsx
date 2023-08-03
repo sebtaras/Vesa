@@ -17,6 +17,7 @@ import { NativeBaseProvider, extendTheme } from "native-base";
 import { StackNavigator } from "./src/navigation/StackNavigator";
 import { ThemeProvider } from "./src/context/ThemeContext";
 import { NavigationContainer } from "@react-navigation/native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function App() {
 	let [fontsLoaded] = useFonts({
@@ -37,11 +38,13 @@ export default function App() {
 
 	return (
 		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
-			<ThemeProvider>
-				<NavigationContainer>
-					<StackNavigator />
-				</NavigationContainer>
-			</ThemeProvider>
+			<GestureHandlerRootView style={{ flex: 1 }}>
+				<ThemeProvider>
+					<NavigationContainer>
+						<StackNavigator />
+					</NavigationContainer>
+				</ThemeProvider>
+			</GestureHandlerRootView>
 		</View>
 	);
 }

@@ -1,41 +1,41 @@
 {
-  "name": "vesa",
-  "version": "1.0.0",
-  "main": "node_modules/expo/AppEntry.js",
-  "scripts": {
-    "start": "expo start",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
-    "web": "expo start --web"
-  },
-  "dependencies": {
-    "@expo-google-fonts/inter": "^0.2.3",
-    "@expo-google-fonts/ubuntu": "^0.2.3",
-    "@react-native-async-storage/async-storage": "1.17.11",
-    "@react-navigation/drawer": "^6.6.2",
-    "@react-navigation/native": "^6.1.6",
-    "@react-navigation/native-stack": "^6.9.12",
-    "expo": "~48.0.15",
-    "expo-font": "~11.1.1",
-    "expo-splash-screen": "~0.18.2",
-    "expo-status-bar": "~1.4.4",
-    "native-base": "^3.4.28",
-    "react": "18.2.0",
-    "react-native": "0.71.8",
-    "react-native-date-picker": "^4.2.13",
-    "react-native-gesture-handler": "~2.9.0",
-    "react-native-reanimated": "~2.14.4",
-    "react-native-responsive-screen": "^1.4.2",
-    "react-native-safe-area-context": "4.5.0",
-    "react-native-screens": "~3.20.0",
-    "react-native-svg": "13.4.0",
-    "rn-slide-button": "^1.0.3",
-    "expo-haptics": "~12.2.1"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@types/react": "~18.0.14",
-    "typescript": "^4.9.4"
-  },
-  "private": true
+	"name": "vesa",
+	"version": "1.0.0",
+	"main": "node_modules/expo/AppEntry.js",
+	"scripts": {
+		"start": "expo start",
+		"android": "expo start --android",
+		"ios": "expo start --ios",
+		"web": "expo start --web"
+	},
+	"dependencies": {
+		"@expo-google-fonts/inter": "^0.2.3",
+		"@expo-google-fonts/ubuntu": "^0.2.3",
+		"@react-native-async-storage/async-storage": "1.18.2",
+		"@react-navigation/drawer": "^6.6.2",
+		"@react-navigation/native": "^6.1.6",
+		"@react-navigation/native-stack": "^6.9.12",
+		"expo": "^49.0.0",
+		"expo-font": "~11.4.0",
+		"expo-haptics": "~12.4.0",
+		"expo-splash-screen": "~0.20.5",
+		"expo-status-bar": "~1.6.0",
+		"native-base": "^3.4.28",
+		"react": "18.2.0",
+		"react-native": "0.72.3",
+		"react-native-date-picker": "^4.2.13",
+		"react-native-gesture-handler": "~2.12.0",
+		"react-native-reanimated": "~3.3.0",
+		"react-native-responsive-screen": "^1.4.2",
+		"react-native-safe-area-context": "4.6.3",
+		"react-native-screens": "~3.22.0",
+		"react-native-svg": "13.9.0",
+		"rn-slide-button": "^1.0.3"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.20.0",
+		"@types/react": "~18.0.14",
+		"typescript": "^4.9.4"
+	},
+	"private": true
 }
