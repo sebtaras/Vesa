@@ -25,20 +25,20 @@ interface Props {
 const CurrentSection = ({ navigation }: Props) => {
 	const { theme } = useTheme();
 	const [maxWidth, setMaxWidth] = useState(0);
-	const widthP = 113.65 / 200;
+	const widthP = 22 / 200;
 	const width = useSharedValue(0);
 
 	const setWidth = () => {
-		console.log("im widthinggg");
 		width.value = withTiming(widthP * maxWidth, {
 			duration: 1500,
 			easing: Easing.out(Easing.ease),
 		});
+		console.log("im widthinggg", width.value);
 	};
 
 	useEffect(() => {
 		setWidth();
-	}, []);
+	}, [widthP, maxWidth]);
 
 	return (
 		<View style={sharedStyles.sectionContainer}>
@@ -73,7 +73,6 @@ const CurrentSection = ({ navigation }: Props) => {
 					onLayout={(event) => {
 						var { width } = event.nativeEvent.layout;
 						setMaxWidth(width);
-						console.log("width", width);
 					}}
 					style={{
 						flex: 1,
@@ -122,7 +121,8 @@ const CurrentSection = ({ navigation }: Props) => {
 					justifyContent: "center",
 					elevation: 3,
 				}}
-				onPress={() => navigation.push("Period")}
+				onPress={() => navigation.push("Budget")}
+				// onPress={() => }
 			>
 				<Entypo name="arrow-right" size={35} color="black" />
 			</TouchableOpacity>

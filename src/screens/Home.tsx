@@ -7,7 +7,7 @@ import {
 	TouchableOpacity,
 } from "react-native";
 import React from "react";
-import { debugStyles, largeFont, normalFont, sharedStyles } from "../util/commonStyles";
+import { largeFont, normalFont, sharedStyles } from "../util/commonStyles";
 import {
 	heightPercentageToDP,
 	widthPercentageToDP,
@@ -16,11 +16,14 @@ import { MaterialIcons } from "@expo/vector-icons";
 import Animated, {
 	Extrapolation,
 	interpolate,
+	interpolateColor,
 	runOnJS,
 	useAnimatedGestureHandler,
 	useAnimatedStyle,
+	useDerivedValue,
 	useSharedValue,
 	withSpring,
+	withTiming,
 } from "react-native-reanimated";
 import { PanGestureHandler } from "react-native-gesture-handler";
 import { useTheme } from "../hooks/useTheme";
@@ -71,13 +74,17 @@ const Home = ({ navigation }: Props): JSX.Element => {
 		setSelectedCategory(selectedCategory === category ? "" : category);
 	};
 
+	const color = useDerivedValue(() => {
+		return withTiming(!!value && !!selectedCategory ? 1 : 0, { duration: 250 });
+	}, [value, selectedCategory]);
+
 	const trigger = () => {
 		console.log("triggering");
-		//check
 		Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-		//create expense
 		createExpense();
 		initialize();
+		setSelectedCategory("");
+		setValue("");
 	};
 
 	const createExpense = () => {
@@ -92,12 +99,15 @@ const Home = ({ navigation }: Props): JSX.Element => {
 
 	const handleGestureEvent = useAnimatedGestureHandler({
 		onStart: (_, context: any) => {
-			console.log("??!?!?");
+			// if (shouldEnable()) {
 			context.startX = X.value;
 			context.endX = SLIDER_END;
+			// }
 		},
 		onActive: (event, context: any) => {
 			if (
+				!!value &&
+				!!selectedCategory &&
 				context.startX + event.translationX < context.endX &&
 				context.startX + event.translationX > 0
 			) {
@@ -120,11 +130,17 @@ const Home = ({ navigation }: Props): JSX.Element => {
 						translateX: X.value,
 					},
 				],
+				backgroundColor: interpolateColor(
+					color.value,
+					[0, 1],
+					[theme.grey, theme.primary]
+				),
 			};
 		}),
 		textStyle: useAnimatedStyle(() => {
 			return {
 				opacity: interpolate(X.value, [0, SLIDER_END], [1, 0], Extrapolation.CLAMP),
+				color: interpolateColor(color.value, [0, 1], [theme.grey, theme.primary]),
 			};
 		}),
 	};
@@ -171,7 +187,7 @@ const Home = ({ navigation }: Props): JSX.Element => {
 									width: INNER_SLIDER_WIDTH,
 									position: "absolute",
 									left: SLIDER_MARGIN,
-									backgroundColor: theme.primary,
+									// backgroundColor: shouldEnable() ? theme.primary : theme.grey,
 									alignItems: "center",
 									justifyContent: "center",
 									borderRadius: 20,
@@ -188,7 +204,7 @@ const Home = ({ navigation }: Props): JSX.Element => {
 					<Animated.Text
 						style={[
 							{
-								color: theme.primary,
+								// color: shouldEnable() ? theme.primary : theme.grey,
 								fontFamily: "Ubuntu_500Medium",
 								fontSize: largeFont,
 							},

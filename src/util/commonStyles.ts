@@ -27,6 +27,12 @@ export const sharedStyles = StyleSheet.create({
 		fontFamily: "Ubuntu_400Regular",
 		fontSize: largeFont,
 	},
+	button: {
+		paddingHorizontal: widthPercentageToDP("2.5%"),
+		paddingVertical: heightPercentageToDP("1.5%"),
+		textAlign: "center",
+		borderRadius: 5,
+	},
 });
 
 export const debugStyles = StyleSheet.create({

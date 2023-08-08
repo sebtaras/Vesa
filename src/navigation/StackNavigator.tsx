@@ -3,7 +3,7 @@ import Home from "../screens/Home";
 import { useTheme } from "../hooks/useTheme";
 import Header from "../components/Header";
 import History from "../screens/History";
-import Period from "../screens/Period";
+import Budget from "../screens/Budget";
 import { useNavigation } from "@react-navigation/native";
 import Settings from "../screens/Settings";
 
@@ -22,8 +22,8 @@ export const StackNavigator = () => {
 				}}
 			/>
 			<Stack.Screen
-				name="Period"
-				component={Period}
+				name="Budget"
+				component={Budget}
 				options={{
 					header: () => <Header navigation={navigation} showBackComponent={true} />,
 				}}

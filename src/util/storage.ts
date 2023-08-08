@@ -1,7 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Theme } from "./constants";
-import { TExpense } from "./type";
+import { TBudget, TExpense } from "./type";
 
+//theme
 export const loadTheme = async () => {
 	const value = await AsyncStorage.getItem("theme");
 	return value ? value : Theme.DARK;
@@ -18,6 +19,7 @@ export const saveExpense = async (expense: TExpense) => {
 	await AsyncStorage.setItem("expenses", JSON.stringify(expenses));
 };
 
+//expenses
 const randomExpenses: TExpense[] = [
 	{
 		amount: 24.29,
@@ -44,4 +46,34 @@ export const loadLastThree = async () => {
 	} else {
 		return expenses;
 	}
+};
+
+export const initialBudget: TBudget = {
+	bills: null,
+	eating_out: null,
+	fun: null,
+	groceries: null,
+	health: null,
+	other: null,
+	rent: null,
+	shopping: null,
+	subscriptions: null,
+	transportation: null,
+	restart_day: 1,
+};
+
+//budget
+export const loadBudget = async (): Promise<TBudget> => {
+	const result = await AsyncStorage.getItem("budget");
+	return result ? (JSON.parse(result) as TBudget) : initialBudget;
+};
+
+export const loadHasBudget = async (): Promise<boolean> => {
+	const result = await AsyncStorage.getItem("hasBudget");
+	return result ? JSON.parse(result) : false;
+};
+
+export const saveBudget = async (budget: TBudget): Promise<void> => {
+	await AsyncStorage.setItem("budget", JSON.stringify(budget));
+	await AsyncStorage.setItem("hasBudget", JSON.stringify(true));
 };
