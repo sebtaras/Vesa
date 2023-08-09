@@ -58,7 +58,7 @@ const BudgetEditor = ({ budget, initialize }: Props) => {
 		}
 	}, [budget]);
 
-	console.log("myBudget", myBudget, "total", totalBudget);
+	console.log("adahduiashdi", myBudget, "total", totalBudget);
 
 	return (
 		<View style={styles.screen}>
@@ -89,7 +89,12 @@ const BudgetEditor = ({ budget, initialize }: Props) => {
 					if (key != "restart_day") {
 						return (
 							<View style={styles.categoryContainer} key={index}>
-								<View style={styles.leftCategoryContainer}>
+								<View
+									style={[
+										styles.leftCategoryContainer,
+										{ backgroundColor: theme.backgroundColor1 },
+									]}
+								>
 									<Text style={sharedStyles.normalText}>
 										{capitalizeFirst(key.replace("_", " "))}
 									</Text>
@@ -141,10 +146,11 @@ const BudgetEditor = ({ budget, initialize }: Props) => {
 				style={[
 					sharedStyles.button,
 					{
-						backgroundColor: isChanged ? theme.primary : theme.grey,
+						backgroundColor: isChanged ? theme.primary : theme.backgroundColor2,
 						marginTop: heightPercentageToDP("1%"),
 					},
 				]}
+				disabled={!isChanged}
 				onPress={() => {
 					handleEditBudget();
 				}}

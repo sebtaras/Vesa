@@ -28,7 +28,12 @@ export const getDateForDatePicker = (day: number) => {
 	return date;
 };
 
+export const parseTextInputToNumber = (s: string) => {
+	return s ? parseFloat(s!) : 0;
+};
+
 export const budgetSum = (b: TBudget): number => {
+	console.log("sub da budget", b);
 	let sum = 0;
 	for (const key in b) {
 		if (key !== "restart_day" && b[key as keyof TBudget]) {
@@ -40,4 +45,10 @@ export const budgetSum = (b: TBudget): number => {
 		}
 	}
 	return sum;
+};
+
+export const getBudgetContainerWidth = (v: number | null, sum: number, size: number) => {
+	const res = size === 0 ? 0 : v ? (parseFloat(v.toString()) * size) / sum : 0;
+	console.log("res", res);
+	return res;
 };

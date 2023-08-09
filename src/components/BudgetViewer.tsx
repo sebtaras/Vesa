@@ -14,6 +14,7 @@ import { initialBudget, saveBudget } from "../util/storage";
 import {
 	budgetSum,
 	capitalizeFirst,
+	getBudgetContainerWidth,
 	getDateForDatePicker,
 	getDatePickerText,
 } from "../util/functions";
@@ -31,6 +32,7 @@ const BudgetViewer = ({ budget, initialize }: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [dateError, setDateError] = useState(false);
 	const [totalBudget, setTotalBudget] = useState(0);
+	const [maxWidth, setMaxWidth] = useState(0);
 
 	// const [date, setDate] = useState(new Date());
 	// const [open, setOpen] = useState(false);
@@ -62,6 +64,7 @@ const BudgetViewer = ({ budget, initialize }: Props) => {
 
 	return (
 		<View style={styles.screen}>
+			<Text>Total budget: {budgetSum(myBudget)}</Text>
 			{isOpen && (
 				<RNDateTimePicker
 					mode="date"
@@ -113,7 +116,30 @@ const BudgetViewer = ({ budget, initialize }: Props) => {
 										}}
 									/>
 								</View>
-								<View style={styles.rightCategoryContainer}></View>
+								<View
+									onLayout={(event) => {
+										var { width } = event.nativeEvent.layout;
+										setMaxWidth(width);
+									}}
+									style={[
+										styles.rightOuterCategoryContainer,
+										{ backgroundColor: theme.backgroundColor2 },
+									]}
+								>
+									<View
+										style={[
+											styles.rightInnerCategoryContainer,
+											{
+												backgroundColor: theme.primary,
+												width: getBudgetContainerWidth(
+													myBudget[key as keyof TBudget],
+													budgetSum(myBudget),
+													maxWidth
+												),
+											},
+										]}
+									></View>
+								</View>
 							</View>
 						);
 					}
@@ -167,11 +193,15 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 	},
-	rightCategoryContainer: {
+	rightOuterCategoryContainer: {
 		flex: 1,
-		backgroundColor: "grey",
-		padding: widthPercentageToDP("3"),
 		marginLeft: widthPercentageToDP("1%"),
+		borderTopRightRadius: 5,
+		borderBottomRightRadius: 5,
+	},
+	rightInnerCategoryContainer: {
+		position: "relative",
+		paddingVertical: widthPercentageToDP("3"),
 		borderTopRightRadius: 5,
 		borderBottomRightRadius: 5,
 	},
