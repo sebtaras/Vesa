@@ -1,3 +1,2 @@
 # Vesa
-budgeting app for phone
-that's it
+A budgeting app for phone. That's it
